@@ -162,10 +162,9 @@ class homeMain extends State<mainAppPage>{
 
   List <Widget> controller() {
     return [
-      track(),
-      authentification(),
-
-      track(),
+      backTrack(),
+      backTrack(),
+      backTrack(),
       backTrack()
 
     ];

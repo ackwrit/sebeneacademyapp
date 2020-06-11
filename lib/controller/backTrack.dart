@@ -14,13 +14,21 @@ class backTrack extends StatefulWidget{
 class homeBack extends State<backTrack>{
   Musique musique = new Musique("assets/audios/Backing_track_rumba_Do.mp3", "Rumba");
   AssetsAudioPlayer assetsAudioPlayer = new AssetsAudioPlayer();
+  int deltavitesse =90;
+
   
   @override
+
   Widget build(BuildContext context) {
     assetsAudioPlayer.open(
         Audio(musique.source),
       autoStart: false
 
+    );
+    assetsAudioPlayer.builderRealtimePlayingInfos(
+      builder: (BuildContext context, RealtimePlayingInfos infos){
+        return Text(infos.toString());
+      }
     );
     // TODO: implement build
     return bodyPage();
@@ -31,27 +39,58 @@ class homeBack extends State<backTrack>{
   
   Widget bodyPage(){
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-            icon: (assetsAudioPlayer.isPlaying==true)?Icon(Icons.pause_circle_filled,color: Colors.red,):Icon(Icons.play_circle_filled,color: Colors.red,),
-            onPressed: (){
-              if(assetsAudioPlayer.isPlaying==true)
-                {
-                  assetsAudioPlayer.pause();
-                }
-              else
-                {
-                  assetsAudioPlayer.play();
-                }
 
-            }
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+                icon: Icon(Icons.play_circle_filled,color: Colors.red,),
+                onPressed: (){
+
+                  assetsAudioPlayer.playOrPause();
+
+                }
+            ),
+            Text(musique.nom),
+
+            IconButton(icon: Icon(Icons.remove),
+                onPressed: (){
+              setState(() {
+                deltavitesse =deltavitesse-5;
+              });
+              variationVitesse();
+
+                }
+            ),
+            Text("${deltavitesse} BPM"),
+            IconButton(
+                icon: (Icon(Icons.add)),
+                onPressed: (){
+                  setState(() {
+                    deltavitesse =deltavitesse+5;
+                    variationVitesse();
+                  });
+
+                }
+            ),
+
+          ],
+
         ),
 
-        Text(musique.nom)
+
+
         
       ],
     );
+  }
+
+
+
+  variationVitesse(){
+    assetsAudioPlayer.setPlaySpeed(deltavitesse/90);
+
   }
   
 }
