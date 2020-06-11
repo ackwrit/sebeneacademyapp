@@ -1,4 +1,5 @@
 import 'package:academysebene/classes/Musique.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -37,6 +38,7 @@ class homeTrack extends State<track>{
     Musique("Sample_Congolese_Rumba_beat.mp3", "Congolais Rumba"),
 
   ];
+  AssetsAudioPlayer assetsAudioPlayer;
   @override
   void initState() {
     // TODO: implement initState
@@ -48,8 +50,10 @@ class homeTrack extends State<track>{
 
   }
   @override
+
   Widget build(BuildContext context) {
     // TODO: implement build
+ 
     return new SingleChildScrollView(
       child:Center(
         child: new Column(

@@ -1,6 +1,8 @@
 import 'package:academysebene/classes/fireBaseHelper.dart';
+import 'package:academysebene/controller/backTrack.dart';
 import 'package:academysebene/login.dart';
 import 'package:academysebene/principal.dart';
+import 'package:academysebene/register.dart';
 import 'package:academysebene/track.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +78,17 @@ class homeMain extends State<mainAppPage>{
             Widget controllerSelected = controller()[index];
             return Scaffold(
                 appBar: AppBar(
-                  leading: Icon(Icons.account_circle),
+                  leading: IconButton(
+                      icon: (Icon(Icons.account_circle)),
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (BuildContext context)
+                                {
+                                  return principal();
+                                }
+                        ));
+                      }
+                  ),
 
 
 
@@ -154,7 +166,7 @@ class homeMain extends State<mainAppPage>{
       authentification(),
 
       track(),
-      track(),
+      backTrack()
 
     ];
   }
